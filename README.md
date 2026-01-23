@@ -9,11 +9,7 @@ Cross-platform DNS/Domain info tool voor **Kali Linux**, **macOS** en **Windows*
 Als je Go geïnstalleerd hebt:
 
 ```bash
-<<<<<<< HEAD
 go install github.com/lucasenlucas/Lucas_DNS@latest
-=======
-go install github.com/lucasenlucas/LucasDNS@latest
->>>>>>> c284afc9acca5d209529308c1db34565f2f0d0ec
 ```
 
 Daarna:
@@ -24,46 +20,27 @@ lucasdns --help
 
 ### Optie 2 — via GitHub Releases (aanrader voor non-Go users)
 
-<<<<<<< HEAD
 Download de laatste release binaries voor jouw platform (Linux/macOS/Windows) vanaf [GitHub Releases](https://github.com/lucasenlucas/Lucas_DNS/releases).
-=======
-Download de laatste release binaries voor jouw platform (Linux/macOS/Windows) vanaf [GitHub Releases](https://github.com/lucasenlucas/LucasDNS/releases).
->>>>>>> c284afc9acca5d209529308c1db34565f2f0d0ec
 
 **Linux/macOS installer (automatisch):**
 
 ```bash
-<<<<<<< HEAD
 curl -fsSL https://raw.githubusercontent.com/lucasenlucas/Lucas_DNS/main/scripts/install.sh | sh
-=======
-curl -fsSL https://raw.githubusercontent.com/lucasenlucas/LucasDNS/main/scripts/install.sh | sh
->>>>>>> c284afc9acca5d209529308c1db34565f2f0d0ec
 ```
 
 Of handmatig:
 
 ```bash
-<<<<<<< HEAD
 REPO="lucasenlucas/Lucas_DNS" sh scripts/install.sh
-=======
-REPO="lucasenlucas/LucasDNS" sh scripts/install.sh
->>>>>>> c284afc9acca5d209529308c1db34565f2f0d0ec
 ```
 
 **Windows PowerShell:**
 
 ```powershell
-<<<<<<< HEAD
 .\scripts\install.ps1 -Repo "lucasenlucas/Lucas_DNS"
 ```
 
 Of download handmatig de `.zip` voor Windows vanaf de [releases pagina](https://github.com/lucasenlucas/Lucas_DNS/releases).
-=======
-.\scripts\install.ps1 -Repo "lucasenlucas/LucasDNS"
-```
-
-Of download handmatig de `.zip` voor Windows vanaf de [releases pagina](https://github.com/lucasenlucas/LucasDNS/releases).
->>>>>>> c284afc9acca5d209529308c1db34565f2f0d0ec
 
 ## Gebruik
 
