@@ -25,13 +25,13 @@ Publiceer releases met prebuilt binaries (Linux/macOS/Windows). Dan kunnen users
 Linux/macOS installer (download latest release):
 
 ```bash
-REPO="owner/repo" sh scripts/install.sh
+REPO="lucasenlucas/Lucas_DNS" sh scripts/install.sh
 ```
 
 Windows PowerShell:
 
 ```powershell
-.\scripts\install.ps1 -Repo "owner/repo"
+.\scripts\install.ps1 -Repo "lucasenlucas/Lucas_DNS"
 ```
 
 ## Gebruik
