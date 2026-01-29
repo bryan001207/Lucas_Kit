@@ -20,7 +20,7 @@ import (
 	"github.com/miekg/dns"
 )
 
-const version = "3.2.4"
+const version = "3.2.5"
 
 func printBanner() {
 	fmt.Println("Lucas DNS is made by Lucas Mangroelal | lucasmangroelal.nl")
