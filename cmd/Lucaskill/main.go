@@ -19,7 +19,7 @@ import (
 	"github.com/miekg/dns"
 )
 
-const version = "2.1.3"
+const version = "3.2.4"
 
 func printBanner() {
 	fmt.Println("Lucaskill is made by Lucas Mangroelal | lucasmangroelal.nl")
