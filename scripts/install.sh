@@ -8,7 +8,7 @@ set -eu
 # Installs latest GitHub Release asset into /usr/local/bin (or ~/.local/bin if not writable)
 # Automatisch detecteert architecture (amd64/arm64) en OS (Linux/macOS/Windows)
 
-REPO="${REPO:-lucasenlucas/Lucas_DNS}"
+REPO="${REPO:-lucasenlucas/Lucas_Kit}"
 BIN_NAME="${BIN_NAME:-lucasdns}"
 BIN_NAME_2="${BIN_NAME_2:-lucaskill}"
 

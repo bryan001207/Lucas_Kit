@@ -1,4 +1,4 @@
-project_name: lucasdns
+project_name: lucaskit
 
 before:
   hooks:

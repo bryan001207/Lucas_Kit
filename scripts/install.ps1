@@ -1,5 +1,5 @@
 param(
-  [string]$Repo = "lucasenlucas/Lucas_DNS",
+  [string]$Repo = "lucasenlucas/Lucas_Kit",
   [string]$BinName = "lucasdns"
 )
 
