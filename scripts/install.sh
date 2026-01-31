@@ -2,15 +2,16 @@
 set -eu
 
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/lucasenlucas/Lucas_DNS/main/scripts/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/lucasenlucas/Lucas_Kit/main/scripts/install.sh | sh
 #   Of: REPO="owner/repo" sh install.sh
 #
 # Installs latest GitHub Release asset into /usr/local/bin (or ~/.local/bin if not writable)
 # Automatisch detecteert architecture (amd64/arm64) en OS (Linux/macOS/Windows)
 
 REPO="${REPO:-lucasenlucas/Lucas_Kit}"
-BIN_NAME="${BIN_NAME:-lucasdns}"
-BIN_NAME_2="${BIN_NAME_2:-lucaskill}"
+BIN_1="ultradns"
+BIN_2="sitestress"
+BIN_3="ultracrack"
 
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ARCH_RAW="$(uname -m)"
@@ -40,7 +41,9 @@ trap 'rm -rf "$tmpdir"' EXIT
 
 echo "📦 Downloaden laatste release van ${REPO} voor ${OS}/${ARCH}..."
 
-# Expect artifact naming like: lucasdns_<os>_<arch>.tar.gz (or .zip for windows)
+# Expect artifact naming like: lucaskit_<os>_<arch>.tar.gz (or .zip for windows)
+# Old naming was lucasdns_...
+# New naming is lucaskit_...
 asset=""
 json="$(curl -fsSL "$api")"
 asset="$(printf "%s" "$json" | grep -Eo '"browser_download_url":[^"]*"[^"]+"' | cut -d'"' -f4 | grep -E "${OS}_${ARCH}" | head -n 1 || true)"
@@ -82,56 +85,38 @@ case "$asset" in
     ;;
 esac
 
-if [ ! -f "./${BIN_NAME}" ] && [ -f "./${BIN_NAME}.exe" ]; then
-  BIN_NAME="${BIN_NAME}.exe"
-fi
-
-if [ ! -f "./${BIN_NAME}" ]; then
-  echo "❌ Binary ${BIN_NAME} niet gevonden in archive."
-  exit 1
-fi
-
-# Check for second binary (lucaskill)
-if [ ! -f "./${BIN_NAME_2}" ] && [ -f "./${BIN_NAME_2}.exe" ]; then
-  BIN_NAME_2="${BIN_NAME_2}.exe"
-fi
-
-if [ ! -f "./${BIN_NAME_2}" ]; then
-  echo "⚠️  Binary ${BIN_NAME_2} niet gevonden in archive. (Oudere versie?)"
-fi
-
-chmod +x "./${BIN_NAME}"
-if [ -f "./${BIN_NAME_2}" ]; then
-  chmod +x "./${BIN_NAME_2}"
-fi
-
-# Installeren met of zonder sudo
-if [ "$needs_sudo" = true ]; then
-  echo "🔐 Installeren naar ${dest} (vereist sudo)..."
-  sudo mv "./${BIN_NAME}" "${dest}/lucasdns"
-  sudo chmod +x "${dest}/lucasdns"
+# Function to install binary
+install_bin() {
+  bin="$1"
   
-  if [ -f "./${BIN_NAME_2}" ]; then
-    echo "🔐 Installeren ${BIN_NAME_2}..."
-    sudo mv "./${BIN_NAME_2}" "${dest}/lucaskill"
-    sudo chmod +x "${dest}/lucaskill"
+  # Handle windows extension check if needed (though this script is mostly unix)
+  if [ ! -f "./${bin}" ] && [ -f "./${bin}.exe" ]; then
+    bin="${bin}.exe"
   fi
-else
-  echo "📁 Installeren naar ${dest}..."
-  mv "./${BIN_NAME}" "${dest}/lucasdns"
-  chmod +x "${dest}/lucasdns"
 
-  if [ -f "./${BIN_NAME_2}" ]; then
-    mv "./${BIN_NAME_2}" "${dest}/lucaskill"
-    chmod +x "${dest}/lucaskill"
+  if [ ! -f "./${bin}" ]; then
+    echo "⚠️  Binary ${bin} niet gevonden in archive."
+    return
   fi
-fi
 
-echo ""
-echo "✅ lucasdns succesvol geïnstalleerd naar ${dest}/lucasdns"
-if [ -f "${dest}/lucaskill" ]; then
-    echo "✅ lucaskill succesvol geïnstalleerd naar ${dest}/lucaskill"
-fi
+  chmod +x "./${bin}"
+  
+  if [ "$needs_sudo" = true ]; then
+    echo "🔐 Installeren ${bin} naar ${dest}..."
+    sudo mv "./${bin}" "${dest}/${bin%.exe}"
+    sudo chmod +x "${dest}/${bin%.exe}"
+  else
+    echo "📁 Installeren ${bin} naar ${dest}..."
+    mv "./${bin}" "${dest}/${bin%.exe}"
+    chmod +x "${dest}/${bin%.exe}"
+  fi
+  echo "✅ ${bin} succesvol geïnstalleerd"
+}
+
+install_bin "$BIN_1"
+install_bin "$BIN_2"
+install_bin "$BIN_3"
+
 echo ""
 
 # Check if dest is in PATH
@@ -155,16 +140,16 @@ if [ "$dest" = "${HOME}/.local/bin" ]; then
     echo "  echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"' >> ${SHELL_RC}"
     echo "  source ${SHELL_RC}"
     echo ""
-    echo "Of test direct: ${dest}/lucasdns --help"
+    echo "Of test direct: ${dest}/${BIN_1} --help"
   else
-    echo "🎉 Klaar! Run: lucasdns --help"
+    echo "🎉 Klaar! Run: ${BIN_1} --help"
   fi
 else
   # Test of het werkt
-  if command -v lucasdns >/dev/null 2>&1; then
-    echo "🎉 Klaar! Run: lucasdns --help"
+  if command -v "${BIN_1}" >/dev/null 2>&1; then
+    echo "🎉 Klaar! Run: ${BIN_1} --help"
   else
-    echo "⚠️  lucasdns staat mogelijk niet in je PATH."
+    echo "⚠️  ${BIN_1} staat mogelijk niet in je PATH."
     echo "   Run: export PATH=\"${dest}:\$PATH\""
     echo "   Of open een nieuwe terminal."
   fi

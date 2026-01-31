@@ -1,6 +1,5 @@
 param(
-  [string]$Repo = "lucasenlucas/Lucas_Kit",
-  [string]$BinName = "lucasdns"
+  [string]$Repo = "lucasenlucas/Lucas_Kit"
 )
 
 $ErrorActionPreference = "Stop"
@@ -11,7 +10,7 @@ $arch = if ([Environment]::Is64BitOperatingSystem) { "amd64" } else { "386" }
 $api = "https://api.github.com/repos/$Repo/releases/latest"
 Write-Host "Downloading latest release from $Repo for $os/$arch..."
 
-$release = Invoke-RestMethod -Uri $api -Headers @{ "User-Agent" = "lucasdns-installer" }
+$release = Invoke-RestMethod -Uri $api -Headers @{ "User-Agent" = "lucaskit-installer" }
 $asset = $release.assets | Where-Object { $_.browser_download_url -match "${os}_${arch}" } | Select-Object -First 1
 
 if (-not $asset) {
@@ -25,26 +24,27 @@ Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $archive
 
 Expand-Archive -Path $archive -DestinationPath $tmp.FullName -Force
 
-
-$exe2 = Join-Path $tmp.FullName "lucaskill.exe"
-if (-not (Test-Path $exe2)) {
-  # try any exe in root
-  $exe2 = Get-ChildItem -Path $tmp.FullName -Filter "lucaskill.exe" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
-}
-
-if (-not $exe) {
-  throw "Binary lucasdns.exe not found in archive."
-}
-
+$bins = @("ultradns.exe", "sitestress.exe", "ultracrack.exe")
 $dest = Join-Path $env:USERPROFILE "bin"
 New-Item -ItemType Directory -Path $dest -Force | Out-Null
 
-Copy-Item -Path $exe -Destination (Join-Path $dest "lucasdns.exe") -Force
+foreach ($bin in $bins) {
+    $src = Join-Path $tmp.FullName $bin
+    if (-not (Test-Path $src)) {
+        # Try finding anywhere (sometimes in subdir)
+        $found = Get-ChildItem -Path $tmp.FullName -Filter $bin -Recurse | Select-Object -First 1
+        if ($found) {
+            $src = $found.FullName
+        }
+    }
 
-if ($exe2 -and (Test-Path $exe2)) {
-    Copy-Item -Path $exe2 -Destination (Join-Path $dest "lucaskill.exe") -Force
-    Write-Host "Installed to $dest\\lucaskill.exe"
+    if (Test-Path $src) {
+        Copy-Item -Path $src -Destination (Join-Path $dest $bin) -Force
+        Write-Host "Installed: $bin"
+    } else {
+        Write-Host "Checking for $bin... Not found."
+    }
 }
 
-Write-Host "Installed to $dest\\lucasdns.exe"
-Write-Host "Make sure $dest is in your PATH, then run: lucasdns --help"
+Write-Host "Installation complete in $dest"
+Write-Host "Make sure $dest is in your PATH, then run: ultradns --help"
